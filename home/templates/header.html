@@ -12,10 +12,25 @@
                     <div class="full">
                         <div class="right_header_info">
                             <ul>
-                                <li class="dinone">Contact Us : <img style="margin-right: 15px;margin-left: 15px;" src="{% static 'images/phone_icon.png'%}" alt="#"><a href="#">987-654-3210</a></li>
-                                <li class="dinone"><img style="margin-right: 15px;" src="{% static 'images/mail_icon.png'%}" alt="#"><a href="#">demo@gmail.com</a></li>
-                                <li class="dinone"><img style="margin-right: 15px;height: 21px;position: relative;top: -2px;" src="{% static 'images/location_icon.png'%}" alt="#"><a href="#">104 New york , USA</a></li>
-                                <li class="button_user"><a class="button active" href="#">Login</a><a class="button" href="#">Register</a></li>
+                                <li class="dinone"><a href="/">ANASAYFA</a></li>
+                                <li class="dinone"><a href="/hakkimizda">HAKKIMIZDA</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="dinone text-uppercase pr-0 " id="navbarDropdownMenuLink" href="/dene" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Dene
+                                        <b class="caret"></b>
+                                    </a>
+                                    <div class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
+                                        <a class=" dinone dropdown-item font-weight-bold" href="index.html">Yiyecekler</a>
+                                        <a class=" dinone dropdown-item font-weight-bold" href="index.html">İçecekler</a>
+                                        <a class=" dinone dropdown-item font-weight-bold" href="index.html">Deneme
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="dinone"><a href="/referanslar">REFERANSLAR</a></li>
+                                <li class="dinone"><a href="/iletisim">İLETİŞİM</a></li>
+                                <li class="dinone"><img style="margin-right: 15px;height: 21px;position: relative;top: -2px;" src="{% static 'images/location_icon.png'%}" alt="#"><a href="#">06 Ankara</a></li>
+                                <li class="button_user"><a class="button active" href="#">Giriş</a><a class="button" href="#">Kayıt Ol</a></li>
                                 <li><img style="margin-right: 15px;" src="{% static 'images/search_icon.png'%}" alt="#"></li>
                                 <li>
                                     <button type="button" id="sidebarCollapse">
