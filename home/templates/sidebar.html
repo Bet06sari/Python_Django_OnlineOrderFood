@@ -2,29 +2,37 @@
      <div class="sidebar">
             <!-- Sidebar  -->
             <nav id="sidebar">
+                        <div id="dismiss">
+                            <i class="fa fa-arrow-left"></i>
+                        </div>
 
-                <div id="dismiss">
-                    <i class="fa fa-arrow-left"></i>
-                </div>
+                <li class="container">
 
-                <ul class="list-unstyled components">
+                    <div class="text">Side Menu</div>
 
-                    <li class="active">
-                        <a href="index.html">Anasayfa</a>
-                    </li>
-                    <li>
-                        <a href="about.html">Hakkımızda</a>
-                    </li>
-                    <li>
-                        <a href="recipe.html">Recipe</a>
-                    </li>
-                    <li>
-                        <a href="blog.html">Referanslar</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">İletişim</a>
-                    </li>
-                </ul>
+                        {% load mptt_tags %}
 
+
+                                <li><a class="#"></a> </li><br/>
+                                    {% recursetree catagory %}
+                                        <li class="nav-item dropdown">
+                                        <a href="/catagory/{{ node.slug }}" class="nav-link" {% if not node.is_leaf_node %} data-toggle="dropdown"  aria-expanded="false" {% endif %}> {{ node.title }}{% if not node.is_leaf_node %}<i class="dropdown-toggle"></i>{% endif %} </a>
+
+                                            {% if  not node.is_leaf_node %}
+                                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                <ul class="children">
+                                                    <li><a class="dropdown-item" href="#" > {{ children }} </a> </li>
+
+                                                </ul>
+                                                </div>
+                                            {% endif %}
+                                        </li>
+
+                                    {% endrecursetree %}
+
+                                <li><a href=""></a></li>
+
+                    </ul>
+                </li>
             </nav>
-        </div>
+     </div>
