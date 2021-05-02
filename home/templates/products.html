@@ -1,0 +1,68 @@
+{%  extends "homebase.html" %}
+
+{% block title %}{{ catagorydata.title }} Products {%  endblock %}
+{% block keywords %} {{ catagorydata.keywords }} {%  endblock %}
+{% block description %} {{ catagorydata.description }} {%  endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Anasayfa</a></li>
+                <li class="active">{{ catagorydata.title }}</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /BREADCRUMB -->
+
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <br/><br/><br/><br/><br/>
+
+
+                <div class="blog">
+                        <div class="row">
+                            {% for rs in products %}
+                          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mar_bottom">
+                            <div class="blog_box">
+                              <div class="blog_img_box">
+                                <figure><img src="{{ rs.image.url }}" alt="#"/>
+                                 <span> {{ rs.price }} ₺ </span>
+                                </figure>
+                              </div>
+                               <a href="/product/{{ rs.id }}/{{ rs.slug }}"><h3>{{ rs.title }}</h3></a>
+                              <p> {{ rs.detail }} </p>
+
+                            </div>
+                          </div>
+                                {% endfor %}
+
+                      </div>
+                    </div>
+
+
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /section -->
+
+{% endblock %}
+
+

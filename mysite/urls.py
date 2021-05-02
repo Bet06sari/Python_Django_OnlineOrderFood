@@ -29,6 +29,7 @@ urlpatterns = [
     path('product/', include('product.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('catagory/<int:id>/<slug:slug>/', views.catagory_products, name='catagory_products')
 ]
 
 if settings.DEBUG: # new
