@@ -1,41 +1,40 @@
 {% load static %}
      <div class="sidebar">
             <!-- Sidebar  -->
-            <nav id="sidebar">
-                        <div id="dismiss">
-                            <i class="fa fa-arrow-left"></i>
-                        </div>
-
+            <nav id="sidebar" class="mCustomScrollbar _mCs_1 mCS-autoHide mCS_mo_scrollbar" style="overflow: visible;">
+                <div id="dismiss">
+                    <i class="fa-arrow-left">...</i>
+                </div>
                 <li class="container">
 
-                    <div class="text">Side Menu</div>
+                            <div class="text">Side Menu</div>
 
-                        {% load mptt_tags %}
-
-
-                                <li><a class="#"></a> </li><br/>
-
-                                    {% recursetree catagory %}
-                                        <li class="nav-item dropdown">
-                                        <a href="/catagory/{{ node.id }}/{{ node.slug }}" class="nav-link" {% if not node.is_leaf_node %} data-toggle="dropdown"  aria-expanded="false" {% endif %}> {{ node.title }}{% if not node.is_leaf_node %}<i class="dropdown-toggle"></i>{% endif %} </a>
-
-                                            {% if  not node.is_leaf_node %}
-                                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                <ul class="children">
-                                                    <li><a class="dropdown-item" href="#" > {{ children }} </a> </li>
-
-                                                </ul>
-                                                </div>
-                                            {% endif %}
-                                        </li>
-
-                                    {% endrecursetree %}
+                                {% load mptt_tags %}
 
 
+                                        <li><a class="#"></a> </li><br/>
 
-                                <li><a href=""></a></li>
+                                            {% recursetree catagory %}
+                                                <li class="nav-item dropdown">
+                                                <a href="/catagory/{{ node.id }}/{{ node.slug }}" class="nav-link" {% if not node.is_leaf_node %} data-toggle="dropdown"  aria-expanded="false" {% endif %}> {{ node.title }}{% if not node.is_leaf_node %}<i class="dropdown-toggle"></i>{% endif %} </a>
 
-                    </ul>
+                                                    {% if  not node.is_leaf_node %}
+                                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                        <ul class="children">
+                                                            <li><a class="dropdown-item" href="#" > {{ children }} </a> </li>
+
+                                                        </ul>
+                                                        </div>
+                                                    {% endif %}
+                                                </li>
+
+                                            {% endrecursetree %}
+
+
+
+                                        <li><a href=""></a></li>
+
+                            </ul>
                 </li>
             </nav>
      </div>

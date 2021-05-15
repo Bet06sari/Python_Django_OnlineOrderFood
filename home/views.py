@@ -9,13 +9,18 @@ from product.models import Product, Catagory
 
 def index(request ):
     setting = Setting.objects.get(pk=1)
-    sliderdata = Product.objects.all()[3:23]
+    sliderdata = Product.objects.all()[16:35]
     catagory = Catagory.objects.all()
+    dayproducts=Product.objects.all()[30:31]
+    lastproducts=Product.objects.all()[15:16]
 
     context = {'setting': setting,
                'catagory': catagory,
                'page':'home',
-               'sliderdata':sliderdata}
+               'sliderdata':sliderdata,
+               'dayproducts':dayproducts,
+               'lastproducts':lastproducts
+               }
     return render(request, 'index.html', context)
 
 def hakkimizda(request ):

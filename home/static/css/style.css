@@ -196,7 +196,6 @@
      color: #114c7d;
      font-weight: 400;
      font-size: 28px;
-     background-image: url('../images/fevicon.png');
      background-repeat: no-repeat;
      padding-left: 55px;
      letter-spacing: -0.5px;
@@ -786,47 +785,19 @@
      margin-bottom: 0px;
 }
 /* --------------------------------------------------- SIDEBAR STYLE ----------------------------------------------------- */
-
- nav ul{
-     background: #1b1b1b;
-     height: 100%;
-     width: 100%;
-     list-style: none;
- }
-
- nav ul li{
-     line-height: 60px;
-     border-bottom: 1px solid rgba(255,255,255,0.1);
- }
-
- nav ul li a{
-     color: white;
-     text-decoration: none;
-     font-size: 18px;
-     padding-left: 40px;
-     font-weight: 500;
-     display: block;
-     width: 100%;
- }
-
  #sidebar {
+     width: 280px;
      position: fixed;
-     width: 250px;
-     height: 100%;
-     left: 0;
-     background: #1b1b1b;
+     top: 0;
+     left: -280px;
+     height: 100vh;
+     z-index: 999;
+     background: #fff;
+     color: #fff;
+     transition: all 0.3s;
+     overflow-y: scroll;
+     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
-
- #sidebar .text {
-     color: white;
-     font-size: 25px;
-     font-weight: 600;
-     line-height: 65px;
-     text-align: center;
-     background: #1e1e1e;
-     letter-spacing: 1px;
- }
-
  #sidebar.active {
      left: 0;
 }
@@ -884,7 +855,6 @@
      display: block;
      font-weight: 300;
 }
-
  #sidebar ul li a:hover {
      color: #fff;
      background: #d8b00f;
@@ -961,4 +931,3 @@
      color: #fff;
      font-weight: 500;
 }
- 

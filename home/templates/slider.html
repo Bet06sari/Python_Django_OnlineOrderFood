@@ -8,41 +8,45 @@
                         <div id="main_slider" class="carousel vert slide" data-ride="carousel" data-interval="5000">
                             <div class="carousel-inner">
                                 <!-- banner -->
+                                {% for rs in dayproducts %}
                                 <div class="carousel-item active">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="slider_cont">
-                                                <h3>Şehrinizdeki <br>en iyi Restoranları keşfedin</h3>
-                                                <p>Size en uygun olan menüleri seçip hemen sipariş verin. Haklarınız yemekKovası tarafından saklanmaktadır.</p>
-                                                <a class="main_bt_border" href="#">Sipariş Ver</a>
+                                                <h3> Günün Fırsatı <br>"{{ rs.title }}"<br> {{ rs.price }}₺</h3>
+                                                <p>Şehrinizdeki en iyi Restoranları keşfedin. Size en uygun olan menüleri seçip hemen sipariş verin. Haklarınız yemekKovası tarafından saklanmaktadır.</p>
+                                                <a class="main_bt_border" href="/addtocard/{{ rs.id }}">Sipariş Ver</a>
                                             </div>
                                         </div>
                                         <div class="col-md-7">
                                             <div class="slider_image full text_align_center">
-                                                <img class="img-responsive" src="{% static 'images/burger_slide.png'%}" alt="#" />
+                                                <img class="img-responsive" src="{{ rs.image.url }}" style="height: 600px" alt="#" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                {% endfor %}
                                 <!-- /banner -->
 
                                 <!-- banner -->
+                            {% for rs in lastproducts %}
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="slider_cont">
-                                                <h3>Size en uygun menüleri <br> karşılaştırıp bulun</h3>
+                                                <h3>Görüntülenen ürünlerde : <br> "{{ rs.title }}"<br> {{ rs.price }}₺</h3>
                                                 <p>Diğer restoranlarla yemek-fiyat karşılaştırması yapın ve ürünlerinizi değerlendirme şansı yakalayın.</p>
-                                                <a class="main_bt_border" href="#">Sipariş Ver</a>
+                                                <a class="main_bt_border" href="/addtocard/{{ rs.id }}">Sipariş Ver</a>
                                             </div>
                                         </div>
                                         <div class="col-md-7 full text_align_center">
                                             <div class="slider_image">
-                                                <img class="img-responsive" src="{% static 'images/burger_slide.png'%}" alt="#" />
+                                                <img class="img-responsive" src="{{ rs.image.url }}" style="height: 600px" alt="#" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            {% endfor %}
                                 <!-- banner -->
                             </div>
                             <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">

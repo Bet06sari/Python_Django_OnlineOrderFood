@@ -787,7 +787,7 @@
 }
 /* --------------------------------------------------- SIDEBAR STYLE ----------------------------------------------------- */
  #sidebar {
-     width: 250px;
+     width: 280px;
      position: fixed;
      top: 0;
      left: -280px;
@@ -799,22 +799,9 @@
      overflow-y: scroll;
      box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
-
  #sidebar.active {
      left: 0;
 }
-
-#sidebar.text {
-	color: black;
-	font-size: 25px;
-	font-weight: 600;
-	line-height: 65px;
-	text-align: center;
-	background: #1e1e1e;
-	letter-spacing: 1px;
-	
-	
-	
  #dismiss {
      width: 35px;
      height: 35px;
@@ -847,23 +834,6 @@
      display: block;
      opacity: 1;
 }
-
- *{
-	 margin:0;
-	 padding:0;
-	 user-select:none;
-	 color: white;
-	 box-sizing:border-box;
-	 font-family: 'Poppins', sans-serif;
-	 
-	 
- .sidebar{
-	 position: fixed;
-	 width: 250px;
-	 height: 100%;
-	 left:0;
-	 background: #1b1b1b
- 
  #sidebarCollapse {
      background: transparent;
      padding: 0;
