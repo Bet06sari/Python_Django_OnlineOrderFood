@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from home.models import Setting, ContactFormu, ContactFormMessage
-from product.models import Product, Catagory
+from product.models import Product, Catagory, Images
 
 
 def index(request ):
@@ -65,3 +65,16 @@ def catagory_products(request,id,slug):
                'catagorydata': catagorydata,
                }
     return render(request,'products.html', context)
+
+def product_detail(request,id,slug):
+    catagory = Catagory.objects.all()
+    product = Product.objects.get(pk=id)
+    images = Images.objects.filter(product_id=id)
+    context = {'product': product,
+               'catagory': catagory,
+               'images': images,
+               }
+    return render(request,'product_detail.html',context)
+
+
+
