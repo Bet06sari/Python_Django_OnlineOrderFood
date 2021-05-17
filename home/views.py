@@ -1,10 +1,10 @@
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
 from home.models import Setting, ContactFormu, ContactFormMessage
-from product.models import Product, Catagory, Images
+from product.models import Product, Catagory, Images, Comment
 
 
 def index(request ):
@@ -70,9 +70,11 @@ def product_detail(request,id,slug):
     catagory = Catagory.objects.all()
     product = Product.objects.get(pk=id)
     images = Images.objects.filter(product_id=id)
+    comments = Comment.objects.filter(product_id=id, status='True')
     context = {'product': product,
                'catagory': catagory,
                'images': images,
+               'comments': comments,
                }
     return render(request,'product_detail.html',context)
 

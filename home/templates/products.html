@@ -46,7 +46,7 @@
                                 </figure>
                               </div>
                                <a href="/product/{{ rs.id }}/{{ rs.slug }}"><h3>{{ rs.title }}</h3></a>
-                              <p> {{ rs.detail }} </p>
+                              <p> {{ rs.detail | safe }} </p>
 
                             </div>
                           </div>
