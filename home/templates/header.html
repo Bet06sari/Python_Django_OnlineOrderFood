@@ -1,9 +1,23 @@
 {% load static %}
-<!-- jQuery !-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
-<!-- jQuery UI !-->
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+{% load mptt_tags %}
+
+<script>
+    $(function () {
+        $("#query").autocomplete({
+            source: "/search_auto/",
+            select: function (event, ui) { //item selected
+                AutoCompleteSelectHandler(event, ui)
+            },
+            minLength: 2,
+        });
+    });
+
+    function AutoCompleteSelectHandler(event, ui)
+    {
+        var selectedObj = ui.item;
+    }
+
+</script>
 
 <!-- header -->
     <header>
@@ -46,6 +60,23 @@
                                     <form action="/search/" method="post">
                                         {% csrf_token %}
                                         <input id="query" name="query" class="search-query span2" type="text" size="8px" width="1px" placeholder="Arama">
+
+                                        <select name="catid" class="input search-input" style="width: 150px;">
+                                            <option value="0">Tüm Kategoriler</option>
+                                            {% recursetree catagory %}
+                                                {% if node.is_leaf_node %}
+                                                    <option value="{{ node.id }}">{{ node.title }}</option>
+                                                {% endif %}
+                                                {% if not node.is_leaf_node %}
+                                                    <optgroup label="{{ node.title }}">
+                                                        {{ children }}
+                                                    </optgroup>
+                                                {% endif %}
+                                            {% endrecursetree %}
+                                        </select>
+
+
+
                                         <button class="icon-search" style="background: transparent">
                                             <img style="margin-right: 5px;" src="{% static 'images/search_icon.png'%}" alt="#">
                                         </button>

@@ -1,6 +1,7 @@
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
+import json
 
 # Create your views here.
 from home.forms import SearchForm
@@ -80,19 +81,39 @@ def product_detail(request,id,slug):
     return render(request,'product_detail.html',context)
 
 def product_search(request):
+    setting = Setting.objects.get(pk=1)
     if request.method == 'POST':  # Check form post
         form = SearchForm(request.POST)  # Get form data
         if form.is_valid():
             catagory = Catagory.objects.all()
             query = form.cleaned_data['query']  # Get form data
-            products = Product.objects.filter(title__icontains=query)
+            catid = form.cleaned_data['catid']
+
+            if catid == 0:
+                products = Product.objects.filter(title__icontains=query)  # Select * from Book where title like %query%
+            else:
+                products = Product.objects.filter(title__icontains=query, catagory_id=catid)
 
             context = {'products': products,
                        'catagory': catagory,
+                       'setting': setting
                        }
             return render(request, 'product_search.html', context)
 
     return HttpResponseRedirect('/')
 
-
+def product_search_auto(request):
+    if request.is_ajax():
+        q = request.GET.get('term', '')
+        product = Product.objects.filter(title__icontains=q)
+        results = []
+        for rs in product:
+            product_json = {}
+            product_json = rs.title
+            results.append(product_json)
+        data = json.dumps(results)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
 
