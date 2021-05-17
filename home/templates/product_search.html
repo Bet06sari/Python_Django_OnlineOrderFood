@@ -1,0 +1,56 @@
+{% extends 'homebase.html' %}
+
+{% block title %} Products Search Results {{ setting.company }} {% endblock %}
+{% block keywords %} {{ catagorydata.keywords }} {% endblock %}
+{% block description %} {{ catagorydata.description }}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}' />
+{% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block content %}
+
+
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Anasayfa</a></li>
+                <li class="active">{{ catagorydata.title }}</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /BREADCRUMB -->
+
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <table cellpadding="5" width="1200">
+
+                <br/><br/><br/>
+                    <tr>
+                        <th>Image</th>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                    </tr>
+                <br/><br/><br/>
+                    {% for rs in products %}
+                        <tr>
+                            <td><a href="/product/{{ rs.id }}/{{ rs.slug }}"> <img src="{{ rs.image.url }}" style="width: 100px; height: 100px;" alt=""></a> </td>
+                            <td><h4 class="product-name"><a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a></h4></td>
+                            <td><a href="/catagory/{{ rs.catagory_id }}/{{ rs.catagory.slug }}"> {{ rs.catagory }}</a> </td>
+                            <td><h4>{{ rs.price }}</h4></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

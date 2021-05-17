@@ -3,41 +3,50 @@
     <header>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-lg-2 col-md-2">
                     <div class="full">
-                        <a class="logo" href="index.html"><img src="{% static 'images/logo.png'%}" alt="#" /></a>
+
+                          <a class="logo" href="/anasayfa"><img src="{% static 'images/logo.png'%}" alt="#" /></a>
+
+                    </div>
+                    <div class="header-search" style="padding: 10px">
+
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <div class="full">
                         <div class="right_header_info">
                             <ul>
-                                <li class="dinone"><a href="/">ANASAYFA</a></li>
-                                <li class="dinone"><a href="/hakkimizda">HAKKIMIZDA</a></li>
-                                <li class="nav-item dropdown">
+                                <li class="dinone" style="padding: 3px"><a href="/">ANASAYFA</a></li>
+                                <li class="dinone" style="padding: 3px"><a href="/hakkimizda">HAKKIMIZDA</a></li>
+                                <li class="nav-item dropdown" style="padding: 3px">
                                     <a class="dinone text-uppercase pr-0 " id="navbarDropdownMenuLink" href="/dene" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Dene
                                         <b class="caret"></b>
                                     </a>
                                     <div class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
-                                        <a class=" dinone dropdown-item font-weight-bold" href="index.html">Yiyecekler</a>
-                                        <a class=" dinone dropdown-item font-weight-bold" href="index.html">İçecekler</a>
-                                        <a class=" dinone dropdown-item font-weight-bold" href="index.html">Deneme
+                                        <a class=" dinone dropdown-item font-weight-bold" style="padding: 3px" href="index.html">Yiyecekler</a>
+                                        <a class=" dinone dropdown-item font-weight-bold" style="padding: 3px" href="index.html">İçecekler</a>
+                                        <a class=" dinone dropdown-item font-weight-bold" style="padding: 3px" href="index.html">Deneme
                                         </a>
                                     </div>
                                 </li>
-
-                                <li class="dinone"><a href="/referanslar">REFERANSLAR</a></li>
-                                <li class="dinone"><a href="/iletisim">İLETİŞİM</a></li>
-                                <li class="dinone"><img style="margin-right: 15px;height: 21px;position: relative;top: -2px;" src="{% static 'images/location_icon.png'%}" alt="#"><a href="#">06 Ankara</a></li>
-                                <li class="button_user"><a class="button active" href="#">Giriş</a><a class="button" href="#">Kayıt Ol</a></li>
-                                <li><img style="margin-right: 15px;" src="{% static 'images/search_icon.png'%}" alt="#"></li>
+                                <li class="dinone" style="padding: 3px"><a href="/referanslar">REFERANSLAR</a></li>
+                                <li class="dinone" style="padding: 3px"><a href="/iletisim">İLETİŞİM</a></li>
+                                <li class="dinone" style="padding: 3px"><img style="margin-right: 15px;height: 21px;position: relative;top: -2px;" src="{% static 'images/location_icon.png'%}" alt="#"><a href="#">06 Ankara</a></li>
+                                <li class="button_user" style="padding: 3px"><a class="button active" href="#">Giriş</a><a class="button" style="padding: 3px" href="#">Kayıt Ol</a></li>
+                                <li><button type="button" style="padding: 3px" id="sidebarCollapse"><img src="{% static 'images/menu_icon.png'%}" alt="#"></button></li>
                                 <li>
-                                    <button type="button" id="sidebarCollapse">
-                                        <img src="{% static 'images/menu_icon.png'%}" alt="#">
-                                    </button>
+                                    <form action="/search/" method="post">
+                                        {% csrf_token %}
+                                        <input id="query" name="query" class="search-query span2" type="text" size="8px" width="1px" placeholder="Arama">
+                                        <button class="icon-search" style="background: transparent">
+                                            <img style="margin-right: 5px;" src="{% static 'images/search_icon.png'%}" alt="#">
+                                        </button>
+                                    </form>
                                 </li>
                             </ul>
+
                         </div>
                     </div>
                 </div>
