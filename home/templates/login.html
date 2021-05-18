@@ -1,0 +1,69 @@
+{%  extends "homebase.html" %}
+
+{% block title %} Giriş Sayfası {%  endblock %}
+{% block keywords %} {{ setting.keywords }} {%  endblock %}
+{% block description %} {{ setting.description }} {%  endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Anasayfa</a></li>
+                <li class="active">Login</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /BREADCRUMB -->
+
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+                <div class="row">
+                    <div class="col-md-12" >
+                <br/><br/><br/>
+                        <div class="product_blog_cont">
+                            <div class="section-title">
+                                <h2><span class="theme_color">Giriş Formu</span></h2>
+                            </div>
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{message.tags}}" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input class="input" type="text" name="username" placeholder="Kullanıcı Adı">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="password" name="password" placeholder="Şifre">
+                                </div>
+                                <input type="submit" class="btn" value="Giriş">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /section -->
+{% endblock %}
+
+

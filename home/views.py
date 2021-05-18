@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import logout,authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 import json
@@ -117,3 +118,26 @@ def product_search_auto(request):
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
 
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+def login_view(request):
+    setting = Setting.objects.get(pk=1)
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # Redirect to a success page.
+            return HttpResponseRedirect('/')
+        else:
+            messages.error(request, "Login Hatası ! Kullanıcı adı yada şifre yanlış")
+            return HttpResponseRedirect('/login')
+    catagory = Catagory.objects.all()
+    context = {
+        'catagory': catagory,
+        'setting': setting,
+               }
+    return render(request, 'login.html', context)

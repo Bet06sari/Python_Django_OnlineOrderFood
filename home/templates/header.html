@@ -54,7 +54,25 @@
                                 <li class="dinone" style="padding: 3px"><a href="/referanslar">REFERANSLAR</a></li>
                                 <li class="dinone" style="padding: 3px"><a href="/iletisim">İLETİŞİM</a></li>
                                 <li class="dinone" style="padding: 3px"><img style="margin-right: 15px;height: 21px;position: relative;top: -2px;" src="{% static 'images/location_icon.png'%}" alt="#"><a href="#">06 Ankara</a></li>
-                                <li class="button_user" style="padding: 3px"><a class="button active" href="#">Giriş</a><a class="button" style="padding: 3px" href="#">Kayıt Ol</a></li>
+                                <li class="button_user" style="padding: 3px">
+                                    <div class="ht-right">
+                                        {% if user.id is not None %}
+                                        <a href="/user" class="login-panel" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>
+                                                {{ user.first_name }}
+                                                <b class="caret"></b></a>
+                                                <div class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
+                                                    <a class=" dinone dropdown-item" style="color: black" href="#">Hesabım</a>
+                                                    <a class=" dinone dropdown-item" style="color: black" href="#">İstek listesi</a>
+                                                    <a class=" dinone dropdown-item" style="color: black" href="#">Siparişlerim</a>
+                                                    <a class=" dinone dropdown-item" style="color: black" href="#">Yorumlarım</a>
+                                                    <a class=" dinone dropdown-item" style="color: black" href="/logout">Çıkış</a>
+                                                </div>
+                                        {% else %}
+                                         <a href="/login" class="button active"><i class="fa fa-user"></i> Giriş</a>
+                                        {% endif %}
+                                        <a class="button" style="padding: 3px" href="/join">Kayıt Ol</a>
+                                    </div>
+
                                 <li><button type="button" style="padding: 3px" id="sidebarCollapse"><img src="{% static 'images/menu_icon.png'%}" alt="#"></button></li>
                                 <li>
                                     <form action="/search/" method="post">
