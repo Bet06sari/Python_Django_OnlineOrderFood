@@ -1,0 +1,78 @@
+{%  extends "homebase.html" %}
+
+{% block title %} Kayıt Sayfası {%  endblock %}
+{% block keywords %} {{ setting.keywords }} {%  endblock %}
+{% block description %} {{ setting.description }} {%  endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Anasayfa</a></li>
+                <li class="active">Kullanıcı Kayıt</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /BREADCRUMB -->
+
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+                <div class="row">
+                    <div class="col-md-12" >
+                <br/><br/><br/>
+                        <div class="product_blog_cont">
+                            <div class="section-title">
+                                <h2><span class="theme_color">Giriş Formu</span></h2>
+                            </div>
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{message.tags}}" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            <form method="post">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                    <p>
+                                        {{ field.label_tag }}<br>
+                                        {{ field }}
+                                        {% if field.help_text %}
+                                            <br/>
+                                            <small style="color: grey">{{ field.help_text }}</small>
+                                            <br/>
+                                        {% endif %}
+                                        {% for error in field.errors %}
+                                            <p style="color: red">{{ error }}</p>
+                                        {% endfor %}
+                                    </p>
+                                    {% endfor %}
+                            <br/><br/>
+                                    <button type="btn">Kayıt Ol</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /section -->
+{% endblock %}
+
+
