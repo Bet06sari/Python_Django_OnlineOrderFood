@@ -143,6 +143,7 @@ def login_view(request):
     return render(request, 'login.html', context)
 
 def signup_view(request):
+    setting = Setting.objects.get(pk=1)
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -157,5 +158,6 @@ def signup_view(request):
     catagory = Catagory.objects.all()
     context = {'catagory': catagory,
                'form': form,
+               'setting': setting,
                }
     return render(request, 'signup.html', context)

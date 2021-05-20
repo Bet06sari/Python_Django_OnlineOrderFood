@@ -1,0 +1,93 @@
+{%  extends "homebase.html" %}
+
+{% block title %}{{ profile.user_name }} {%  endblock %}
+{% block keywords %} {{ setting.keywords }} {%  endblock %}
+{% block description %} {{ setting.description }} {%  endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Anasayfa</a></li>
+                <li class="active">Kullanıcı Profili</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /BREADCRUMB -->
+
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+                <div class="row">
+
+                    <div class="col-md-3" >
+                        <br/><br/><br/>
+                        <div class="product_blog_cont">
+                            <div class="section-title">
+                                <h2><span class="theme_color">Kullanıcı Profili</span></h2>
+                            </div>
+                            {% include "user_panel.html" %}
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+                        <br/><br/><br/>
+                        <div class="product_blog_cont">
+                            <div class="section-title">
+                                <h2><span class="theme_color">Kullanıcı Bilgileri</span></h2>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center"></th>
+                                    <td class="thumb"><img src="{{ profile.image.url }}" width="240px" alt=""></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Kullanıcı Adı</th>
+                                    <th class="text-center">{{ profile.user_name}}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">E-Posta</th>
+                                    <th class="text-center">{{ profile.user.email }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Telefon</th>
+                                    <th class="text-center">{{ profile.phone}}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Adres</th>
+                                    <th class="text-center">{{ profile.address }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Şehir</th>
+                                    <th class="text-center">{{ profile.city }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Ülke</th>
+                                    <th class="text-center">{{ profile.country }}</th>
+                                </tr>
+                                </thead>
+                            </table>
+
+                        </div>
+                </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /section -->
+    </div>
+{% endblock %}
