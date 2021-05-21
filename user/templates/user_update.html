@@ -1,0 +1,43 @@
+{%  extends "homebase.html" %}
+
+{% block title %}{{ profile.user_name }} {%  endblock %}
+{% block keywords %} {{ setting.keywords }} {%  endblock %}
+{% block description %} {{ setting.description }} {%  endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-3">
+        <br/><br/><br/><br/><br/><br/><br/><br/>
+            {% include "user_panel.html" %}
+        </div>
+        <div class="col-7">
+            <div class="section-title">
+                <br/><br/><br/>
+                <h4 class="title">Kullanıcı Bilgileri</h4>
+            </div>
+            <div class="content-section">
+                <div class="about_img">
+                    <img src="{{ user.userprofile.image.url }}"  style="height: 100px"/>
+                </div>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        {{ user_form.as_p }}
+                        {{ profile_form.as_p }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
