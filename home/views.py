@@ -7,22 +7,30 @@ import json
 # Create your views here.
 from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactFormu, ContactFormMessage, UserProfile
+from order.models import ShopCart
 from product.models import Product, Catagory, Images, Comment
 
 
 def index(request ):
+    current_user = request.user
     setting = Setting.objects.get(pk=1)
     sliderdata = Product.objects.all()[16:35]
     catagory = Catagory.objects.all()
     dayproducts=Product.objects.all()[30:31]
     lastproducts=Product.objects.all()[15:16]
+    randomproduct = Product.objects.all().order_by('-id')[:9]
+    randomproduct2 = Product.objects.all().order_by('?')[:6]
+    request.session['cart_items']= ShopCart.objects.filter(user_id=current_user.id).count()
+
 
     context = {'setting': setting,
                'catagory': catagory,
                'page':'home',
                'sliderdata':sliderdata,
                'dayproducts':dayproducts,
-               'lastproducts':lastproducts
+               'lastproducts':lastproducts,
+               'randomproduct': randomproduct,
+               'randomproduct2': randomproduct2,
                }
     return render(request, 'index.html', context)
 

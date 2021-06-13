@@ -52,25 +52,35 @@
                     </div>
                 </div>
                 <div class="col-md-7">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" roles="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                     <br/><br/><br/><br/>
                     <div class="about_box">
                         <h1><a class style="color: yellow">{{ product.title }}</a></h1>
                         <p>{{ product.detail | safe }}</p>
                         <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row">
                             <ul class="price list-inline no-margin">
-                                <li class="list-inline-item current">{{ product.price }} ₺</li>
+                                <li class="align-text-top">{{ product.price }} ₺</li>
                             </ul>
                         </div>
                         <div class="d-flex align-items-center justify-content-center justify-content-lg-start">
-                            <div class="quantity d-flex align-items-center">
-                                <span class="text-uppercase">Adet : </span>
-                                <input class="input" type="number" min="0" max="{{ product.amount }}" value="1" class="quantity-no">
-                            </div>
+                            <form action="/order/addtocard/{{ product.id }}" method="post">
+                                {% csrf_token %}
+                                <div class="quantity d-flex align-items-center">
+                                    <a class="align-text-top">
+                                        <h3>Adet : </h3></a>
+                                    <input name="quantity" class="input" style="width: 80px; padding: 8px" type="number" min="0" max="{{ product.amount }}" value="1" >
+
+                                <br/><br/><br/><br/>
+                                    <ul><button type="submit" class="cke_button__anchor_icon"><i class="icon-cart"></i>Add to Cart</button></ul>
+                                </div>
+                            <ul style="padding: 60px"><a href="#" class="btn btn-template-outlined wide"> <i class="fa fa-heart-o"></i>Add to wishlist</a></ul>
                         </div>
-                        <ul class="CTAs list-inline">
-                            <li class="list-inline-item"><a href="#" class="btn btn-template wide"> <i class="icon-cart"></i>Add to Cart</a></li>
-                            <li class="list-inline-item"><a href="#" class="btn btn-template-outlined wide"> <i class="fa fa-heart-o"></i>Add to wishlist</a></li>
-                        </ul>
                     </div>
                 </div>
             </div>

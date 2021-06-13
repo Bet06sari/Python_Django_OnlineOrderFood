@@ -21,7 +21,8 @@
                     <div class="product_blog_cont">
                         <h3>{{ rs.title }}</h3>
                         <h4><span class="theme_color">₺</span>{{ rs.price }}</h4>
-                        <a href= "/product/{{ rs.id }}/{{ rs.slug }}" class="main_bt_border" >Satin Al</a>
+                        <a href= "/product/{{ rs.id }}/{{ rs.slug }}" class="main_bt_border" >Satin Al</a><br/>
+                        <a href="/order/addtocard/{{ rs.id }}" class="fa fa-shopping-cart" style="color: white">Sepete Ekle</a>
                     </div>
                 </div>
                 {% endfor %}
