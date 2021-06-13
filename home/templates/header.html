@@ -71,7 +71,10 @@
                                          <a href="/login" class="button active"><i class="fa fa-user"></i> Giriş</a>
                                         {% endif %}
                                         <a class="button" style="padding: 3px" href="/signup">Kayıt Ol</a>
-                                        <a href="/shopcart/"><i class="fa fa-shopping-cart"><strong class="text-uppercase"> Sepet</strong></i></a>
+                                        <a href="/shopcart/">
+                                            <strong class="text-uppercase"> Sepet</strong><i class="fa fa-shopping-cart">
+                                            <span class="shadow">{{ request.session.cart_items }}</span>
+                                        </i></a>
 
                                     </div>
 
