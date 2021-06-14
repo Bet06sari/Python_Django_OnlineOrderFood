@@ -1,46 +1,41 @@
-{%  extends "homebase.html" %}
+{% extends 'homebase.html' %}
 
-{% block title %}{{ profile.user_name }} {%  endblock %}
-{% block keywords %} {{ setting.keywords }} {%  endblock %}
-{% block description %} {{ setting.description }} {%  endblock %}
+{% block title %} SHOP CART {{ setting.company }} {% endblock %}
+{% block keywords %} {{ catagorydata.keywords }} {% endblock %}
+{% block description %} {{ catagorydata.description }}{% endblock %}
 
 {% block head %}
-    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}' />
 {% endblock %}
 
-{% block sidebar %}
-    {% include "sidebar.html" %}
-{% endblock %}
-
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
 
 {% block content %}
-    <div class="breadcumb_area">
+
+
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb">
         <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Anasayfa</a></li>
+                <li class="active">Sipariş Formu</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /BREADCRUMB -->
+
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
             <div class="row">
-                <div class="col-12">
-                    <ol class="breadcrumb d-flex align-items-center">
-                        <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
-                    </ol>
-                    <!-- btn -->
+                <div class="col-md-12">
+                    <h6 class="title">Degerli Okurumuz;</h6><br>
+                    <h6>Satin alma işlemin başarı ile gerçekleştirmiştir.</h6>
+                    <h4>Sipariş Kodu: {{ordercode}}</h4>
                 </div>
             </div>
         </div>
     </div>
-    <section class="single_product_details_area section_padding_0_100">
-        <div class="container">
-            <div class="row">
-                 <div class="col-12 col-md-6">
-                    <div class="single_product_desc">
-
-                <h6 class="title">Degerli Müşteri;</h6><br>
-                <h6>Satin alma işlemin başarı ile gerçekleştirmiştir.</h6>
-                <h4>Sipariş Kodu: {{ordercode}}</h4>
-
-                    </div>
-                 </div>
-            </div>
-        </div>
-    </section>
-
-
 {% endblock %}

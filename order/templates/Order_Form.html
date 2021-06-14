@@ -1,0 +1,122 @@
+{% extends 'homebase.html' %}
+
+{% block title %} SHOP CART {{ setting.company }} {% endblock %}
+{% block keywords %} {{ catagorydata.keywords }} {% endblock %}
+{% block description %} {{ catagorydata.description }}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}' />
+{% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block content %}
+
+
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Anasayfa</a></li>
+                <li class="active">Sipariş Formu</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /BREADCRUMB -->
+
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <form action="" method="post">
+                    <div class="col-12 col-md-3">
+                        {% csrf_token %}
+                        <br/><br/><br/>
+                            <h5>Fatura adresi</h5>
+                        <br/><br/><br/><br/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="first_name">İsim<span>*</span></label>
+                                <input type="text" class="form-control" name="first_name" value="{{user.first_name}}" >
+                            </div>
+                            <div class="col-md-12">
+                                <label for="last_name">Soyisim <span>*</span></label>
+                                <input type="text" class="form-control" name="last_name"  value="{{user.last_name}}" >
+                            </div>
+                            <div class="col-12">
+                                <label for="phone_number">telefon no <span>*</span></label>
+                                <input type="text" class="form-control" name="phone" min="0" value="{{ profile.phone}}">
+                            </div>
+                            <div class="col-12">
+                                <label for="street_address">Adres <span>*</span></label>
+                                <input type="text" class="form-control mb-3" name="address" value="{{profile.address}}">
+                            </div>
+                            <div class="col-12">
+                                <label for="city">Şehir<span>*</span></label>
+                                <select class="custom-select d-block w-100" name ="city">
+                                    <option value="{{profile.city }}" seçilen>{{ profile.city }}</option>
+                                    <option value="Istanbul">Istanbul</option>
+                                    <option value="Ankara">Ankara</option>
+                                    <option value="Karabuk">Karabuk</option>
+                                    <option value="Manisa">Manisa</option>
+                                    <option value="Antalya">Antalya</option>
+                                    <option value="izmir">izmir</option>
+                                    <option value="Bursa ">Bursa</option>
+                                    <option value="Trabzon">Trabzon</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="country">ülke<span>*</span></label>
+                                <input type="text" class="form-control" name="country" value="{{profile.country}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <h4>Sepet Ürün Listesi</h4>
+                        <table cellpadding="2" width="600">
+                            <br/><br/><br/>
+                            <tr>
+                                <th>Image</th>
+                                <th>Product Name</th>
+                                <th>Category</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                            <br/><br/><br/>
+                            <tbody>
+                            {% for rs in shopcart %}
+                                <tr>
+                                    <td><img src="{{ rs.product.image.url }}" style="width: 100px; height: 100px;" alt=""></td>
+                                    <td><h4 class="product-name"><a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.product.title }}</a></h4></td>
+                                    <td><a href="/catagory/{{ rs.catagory_id }}/{{ rs.catagory.slug }}"> {{ rs.product.catagory }}</a> </td>
+                                    <td>{{ rs.quantity }}</td>
+                                    <td><h4>{{ rs.amount }}</h4></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th class="empty-form" colspan="3"></th>
+                                <th>SUBTOTAL</th>
+                                <th aria-colspan="2" class="total">{{ total }}</th>
+                            </tr>
+                            <tr>
+                                <th class="empty-form" colspan="3"></th>
+                                <th>TOTAL</th>
+                                <th aria-colspan="2">{{ total }}</th>
+                            </tr>
+                            <tr>
+                                <th class="empty-form" colspan="3"></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        <br/><br/>
+                        <button type="submit" class="main_bt"><h2 style="color:yellow;"><a href="/order/orderproduct"> Siparişi Tamamla</a></h2></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
