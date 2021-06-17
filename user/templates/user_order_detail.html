@@ -1,0 +1,131 @@
+{%  extends "homebase.html" %}
+
+{% block title %}{{ profile.user_name }} Sipariş Detayı {%  endblock %}
+{% block keywords %} {{ setting.keywords }} {%  endblock %}
+{% block description %} {{ setting.description }} {%  endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Anasayfa</a></li>
+                <li class="active">Sipariş Detayları</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /BREADCRUMB -->
+
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+                <div class="row">
+
+                    <div class="col-md-3" >
+                        <br/><br/><br/>
+                        <div class="product_blog_cont">
+                            <div class="section-title">
+                                <h2><span class="theme_color">Kullanıcı Profili</span></h2>
+                            </div>
+                            {% include "user_panel.html" %}
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+                        <br/><br/><br/>
+                        <div class="section-title">
+                                <h2><span class="theme_color"> Alışveris Bilgileri </span></h2>
+                            </div>
+                    <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Kullanıcı Adı</th>
+                                    <th class="text-center">{{ order.user_name}}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Telefon</th>
+                                    <th class="text-center">{{ order.phone}}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Adres</th>
+                                    <th class="text-center">{{ order.address }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Şehir</th>
+                                    <th class="text-center">{{ order.city }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Ülke</th>
+                                    <th class="text-center">{{ order.country }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">{{ order.status }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Date</th>
+                                    <th class="text-center">{{ order.created_at }}</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Shipping Inf </th>
+                                    <th class="text-center">{{ order.adminnote }}</th>
+                                </tr>
+                                </thead>
+                            </table>
+
+
+
+                        <div class="product_blog_cont">
+                            <div class="section-title">
+                                <h2><span class="theme_color">Kullanıcı Siparişleri</span></h2>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="text-left">Id </th>
+                                    <th class="text-left">Product Name </th>
+                                    <th class="text-left">Price </th>
+                                    <th class="text-left">Quantity </th>
+                                    <th class="text-left">Amount </th>
+                                    <th class="text-left">Status </th>
+                                    <th class="text-left">Date </th>
+                                </tr>
+                                {% for rs in orderitems %}
+                                <tr>
+                                    <td class="text-left">
+                                        <a href="/product/{{ rs.product_id }}/{{ rs.product.slug }}">
+                                        <img src="{{ rs.product.image.url }}" style="height: 110px"/>
+                                        </a>
+                                    </td>
+                                    <td class="text-left">{{ rs.product.title }}</td>
+                                    <td class="text-left">{{ rs.price }}</td>
+                                    <td class="text-left">{{ rs.quantity }}</td>
+                                    <td class="text-left">{{ rs.amount }}</td>
+                                    <td class="text-left">{{ rs.status }}</td>
+                                    <td class="text-left">{{ rs.created_at }}</td>
+                                </tr>
+                                {% endfor %}
+                                </thead>
+                            </table>
+
+                        </div>
+                </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /section -->
+    </div>
+{% endblock %}

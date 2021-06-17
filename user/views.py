@@ -7,10 +7,11 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from home.models import Setting, UserProfile
+from order.models import Order, OrderProduct
 from product.models import Catagory
 from user.forms import UserUpdateForm, ProfileUpdateForm
 
-
+@login_required(login_url='/login')
 def index(request):
     setting = Setting.objects.get(pk=1)
     catagory = Catagory.objects.all()
@@ -20,8 +21,6 @@ def index(request):
                'setting': setting,
                'profile': profile }
     return render(request,'user_profile.html',context)
-
-
 
 
 @login_required(login_url='/login')
@@ -68,3 +67,29 @@ def change_password(request):
                           'catagory': catagory,
                           'setting': setting,
         })
+
+@login_required(login_url='/login')
+def orders(request):
+    catagory = Catagory.objects.all()
+    current_user = request.user
+    orders = Order.objects.filter(user_id=current_user.id)
+    context = {
+        'catagory' : catagory,
+        'orders' : orders,
+    }
+    return render(request,'user_orders.html',context)
+
+@login_required(login_url='/login')
+def orderdetail(request,id):
+    catagory = Catagory.objects.all()
+    current_user = request.user
+    order = Order.objects.get(user_id=current_user.id, id=id)
+    orderitems = OrderProduct.objects.filter(order_id=id)
+    context = {
+        'catagory': catagory,
+        'order': order,
+        'orderitems': orderitems,
+    }
+    return render(request, 'user_order_detail.html', context)
+
+
