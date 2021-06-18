@@ -80,6 +80,7 @@
                                     <ul><button type="submit" class="cke_button__anchor_icon"><i class="icon-cart"></i>Add to Cart</button></ul>
                                 </div>
                             <ul style="padding: 60px"><a href="#" class="btn btn-template-outlined wide"> <i class="fa fa-heart-o"></i>Add to wishlist</a></ul>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -185,11 +186,11 @@
                                                     </div>
                                                     <br/><br/><br/>
 
-                                                {% if user.id is not None %}
-                                                    <button class="main_bt">Submit</button>
-                                                {% else %}
-                                                    <b>Yorum Eklemek için <a href="/login">Login</a> olunuz!</b>
-                                                {% endif %}
+                                                    {% if user.id is not None %}
+                                                        <button class="main_bt">Submit</button>
+                                                    {% else %}
+                                                        <b>Yorum Eklemek için <a href="/login">Login</a> olunuz!</b>
+                                                    {% endif %}
 
                                             </form>
 

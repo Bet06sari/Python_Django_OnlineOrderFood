@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from home.models import Setting, UserProfile
 from order.models import Order, OrderProduct
-from product.models import Catagory
+from product.models import Catagory, Comment
 from user.forms import UserUpdateForm, ProfileUpdateForm
 
 @login_required(login_url='/login')
@@ -92,4 +92,20 @@ def orderdetail(request,id):
     }
     return render(request, 'user_order_detail.html', context)
 
+@login_required(login_url='/login')
+def comments(request):
+    catagory = Catagory.objects.all()
+    current_user = request.user
+    comments = Comment.objects.filter(user_id=current_user.id)
+    context = {
+        'catagory': catagory,
+        'comments': comments,
+    }
+    return render(request, 'user_comments.html', context)
 
+@login_required(login_url='/login')
+def deletecomment(request,id):
+    current_user = request.user
+    Comment.objects.filter(id=id, user_id=current_user.id).delete()
+    messages.success(request, 'Comment deleted..')
+    return HttpResponseRedirect('/user/comments')
