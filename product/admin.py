@@ -3,7 +3,8 @@ from django.contrib import admin
 # Register your models here.
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 
-from product.models import Catagory, Product, Images, Comment
+from product.models import Catagory, Product, Images, Comment, Restaurant
+
 
 class ProductImageInline(admin.TabularInline):
     model = Images
@@ -11,6 +12,10 @@ class ProductImageInline(admin.TabularInline):
 
 
 class CategoryAdmin(MPTTModelAdmin):
+    list_display = ['title', 'status', 'image_tag']
+    list_filter = ['status']
+
+class RestaurantAdmin(MPTTModelAdmin):
     list_display = ['title', 'status', 'image_tag']
     list_filter = ['status']
 
@@ -68,5 +73,6 @@ class CommentAdmin(admin.ModelAdmin):
 
 admin.site.register(Catagory, CategoryAdmin2)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Restaurant, RestaurantAdmin)
 admin.site.register(Images, ImagesAdmin)
 admin.site.register(Comment,CommentAdmin)

@@ -1,0 +1,58 @@
+{% extends 'homebase.html' %}
+
+{% block title %} Sıkça Sorulan Sorular {{ setting.company }} {% endblock %}
+{% block keywords %} {% endblock %}
+{% block description %}{% endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}' />
+    <script>
+    $(function () {
+        $( "#accordion" ).accordion({
+            collapse: true
+        });
+    });
+    </script>
+{% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block content %}
+
+
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Anasayfa</a></li>
+                <br/><br/><br/><br/>
+                <li class="active">Sıkça Sorulan Sorular</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /BREADCRUMB -->
+
+    <!-- section -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="section-title">
+                    <h2><span class="theme_color">Sıkça Sorulan Sorular</span></h2>
+
+                    <div id="accordion">
+                        <br/><br/><br/><br/>
+                        {% for rs in faq %}
+                        <h3>{{ rs.question }}</h3>
+                        <div>
+                        <p>{{ rs.answer }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

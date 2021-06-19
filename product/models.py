@@ -44,12 +44,50 @@ class Catagory(MPTTModel):
         return reverse('catagory_detail', kwargs={'slug': self.slug})
 
 
+class Restaurant(MPTTModel):
+    STATUS = (
+        ('True', 'Evet'),
+        ('False', 'Hayır'),
+    )
+    title = models.CharField(max_length=100)
+    keywords = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
+    image = models.ImageField(blank=True, upload_to='images/')
+    type = models.CharField(max_length=100)
+    detail = RichTextUploadingField()
+    slug = models.SlugField(null=False, unique=True)
+    parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
+    city = models.CharField(blank=True, max_length=20)
+    town = models.CharField(max_length=150)
+    district = models.CharField(max_length=150)
+    location = models.CharField(max_length=150)
+    status = models.CharField(max_length=10, choices=STATUS)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        full_path = [self.title]
+        k = self.parent
+        while k is not None:
+            full_path.append(k.title)
+            k = k.parent
+        return ' -> '.join(full_path[::-1])
+
+    def image_tag(self):
+        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+    image_tag.short_description = 'Image'
+
+
+
+
 class Product(models.Model):
     STATUS = (
         ('True', 'Evet'),
         ('False', 'Hayır'),
     )
     catagory = models.ForeignKey(Catagory, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     keywords = models.CharField(blank=True,max_length=255)
     description = models.CharField(blank=True,max_length=255)

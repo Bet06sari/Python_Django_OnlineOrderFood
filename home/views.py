@@ -1,3 +1,4 @@
+
 from django.contrib import messages
 from django.contrib.auth import logout,authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
@@ -6,7 +7,7 @@ import json
 
 # Create your views here.
 from home.forms import SearchForm, SignUpForm
-from home.models import Setting, ContactFormu, ContactFormMessage, UserProfile
+from home.models import Setting, ContactFormu, ContactFormMessage, UserProfile, FAQ
 from order.models import ShopCart
 from product.models import Product, Catagory, Images, Comment
 
@@ -176,3 +177,12 @@ def signup_view(request):
                'setting': setting,
                }
     return render(request, 'signup.html', context)
+
+def faq(request):
+    catagory = Catagory.objects.all()
+    faq = FAQ.objects.all().order_by('ordernumber')
+    context = {'catagory': catagory,
+               'faq': faq,
+               }
+
+    return render(request, 'faq.html', context)

@@ -42,7 +42,7 @@ urlpatterns = [
     path('login/', views.login_view, name='login_view'),
     path('signup/', views.signup_view, name='signup_view'),
     path('shopcart/', orderviews.shopcart, name='shopcart'),
-
+    path('sss/', views.faq, name='faq'),
 
 ]
 
