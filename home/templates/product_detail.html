@@ -41,16 +41,17 @@
                         <br/><br/>
                         <div data-slider="1" class="owl-carousel items-slider owl-drag">
                             <div class="item">
-                                <button class="owl-thumb-item "><img src="{{ product.image.url }}" alt="shirt" style="height: 80px " hspace="10px" ></button>
+                                <button class="owl-thumb-item "><img src=" {{ product.image.url }} " alt="shirt" style="height: 80px " hspace="10px" ></button>
                             </div>
                             {% for rs in images %}
                             <div class="item">
-                                <button class="owl-thumb-item"><img src="{{ rs.image.url }}" alt="shirt" style="height: 80px " hspace="10px" ></button>
+                                <button class="owl-thumb-item"><img src=" {{ rs.image.url }} " alt="shirt" style="height: 80px " hspace="10px" ></button>
                             </div>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-7">
                     {% if messages %}
                         {% for message in messages %}
@@ -61,6 +62,7 @@
                     {% endif %}
                     <br/><br/><br/><br/>
                     <div class="about_box">
+                        <a href="/restaurant/{{ product.restaurant.id }}/{{ product.restaurant.slug }}"><img src="{{ product.restaurant.image.url }}" style="height: 100px" align="right"></a>
                         <h1><a class style="color: yellow">{{ product.title }}</a></h1>
                         <p>{{ product.detail | safe }}</p>
                         <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row">

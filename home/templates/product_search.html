@@ -38,6 +38,7 @@
                         <th>Image</th>
                         <th>Product Name</th>
                         <th>Category</th>
+                        <th>Restaurant</th>
                         <th>Price</th>
                     </tr>
                 <br/><br/><br/>
@@ -46,6 +47,7 @@
                             <td><a href="/product/{{ rs.id }}/{{ rs.slug }}"> <img src="{{ rs.image.url }}" style="width: 100px; height: 100px;" alt=""></a> </td>
                             <td><h4 class="product-name"><a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a></h4></td>
                             <td><a href="/catagory/{{ rs.catagory_id }}/{{ rs.catagory.slug }}"> {{ rs.catagory }}</a> </td>
+                            <td>> <img src="{{ rs.restaurant.image.url }}" style="width: 100px; height: 100px;" alt=""></td>
                             <td><h4>{{ rs.price }}</h4></td>
                         </tr>
                     {% endfor %}

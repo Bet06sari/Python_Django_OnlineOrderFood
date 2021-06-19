@@ -36,6 +36,7 @@ urlpatterns = [
     path('home/', include('home.urls')),
     path('catagory/<int:id>/<slug:slug>/', views.catagory_products, name='catagory_products'),
     path('product/<int:id>/<slug:slug>/', views.product_detail, name='product_detail'),
+    path('restaurant/<int:id>/<slug:slug>/', views.restaurant_detail, name='restaurant_detail'),
     path('search/', views.product_search, name='product_search'),
     path('search_auto/', views.product_search_auto, name='product_search_auto'),
     path('logout/', views.logout_view, name='logout_view'),

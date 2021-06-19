@@ -1,0 +1,87 @@
+{%  extends "homebase.html" %}
+
+{% block title %}{{ restaurant.title }} {%  endblock %}
+{% block keywords %} {%  endblock %}
+{% block description %}{%  endblock %}
+
+{% block head %}
+    <link rel='shortcut icon' type='image/x-icon' href='{{ setting.icon.url }}'/>
+{% endblock %}
+
+{% block sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+
+
+{% block content %}
+    <br/><br/><br/><br/><br/>
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Anasayfa /</a></li>
+                <li><a href="/">Restoran /</a></li>
+                <li><a href="/">{{ restaurant }} /</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /BREADCRUMB -->
+
+
+    <!-- section -->
+    <div class="section">
+    <!-- about -->
+    <div class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <br/><br/><br/><br/>
+                    <figure><img src="{{ restaurant.image.url }}" style="height: 320px"></figure>
+                    <br/><br/>
+                </div>
+                <div class="col-md-7">
+                    <br/><br/><br/><br/>
+                    <div class="about_box">
+                        <h1><a class style="color: yellow">{{ restaurant.title }}</a></h1>
+                        <p>{{ restaurant.detail | safe }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="container">
+            <div class="row">
+                <div class="col-12">
+                        <h4>Restoranın Ürünleri : </h4>
+                <table cellpadding="3" width="1200">
+
+                <br/><br/><br/>
+                    <tr>
+                        <th>Image</th>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Restaurant</th>
+                        <th>Price</th>
+                    </tr>
+                <br/><br/><br/>
+                    {% for rs in product %}
+                        <tr>
+                            <td><img src="{{ rs.image.url }}" style="width: 100px; height: 100px;" alt=""></td>
+                            <td><h4 class="product-name"><a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a></h4></td>
+                            <td><a href="/catagory/{{ rs.catagory_id }}/{{ rs.catagory.slug }}"> {{ rs.catagory }}</a> </td>
+                            <td>{{ rs.restaurant }}</td>
+                            <td><h4>{{ rs.price }}</h4></td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+                </div>
+            </div>
+    </div>
+    </div>
+    </div>
+
+
+{% endblock %}
+
+

@@ -15,12 +15,14 @@ class CategoryAdmin(MPTTModelAdmin):
     list_display = ['title', 'status', 'image_tag']
     list_filter = ['status']
 
-class RestaurantAdmin(MPTTModelAdmin):
-    list_display = ['title', 'status', 'image_tag']
-    list_filter = ['status']
+class RestaurantAdmin(admin.ModelAdmin):
+    list_display = ['title', 'status', 'image_tag', 'id']
+    readonly_fields = ('image_tag',)
+    list_filter = ['status', 'product']
+    prepopulated_fields = {'slug': ('title',)}
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'catagory', 'price', 'amount', 'image_tag', 'status']
+    list_display = ['title', 'catagory', 'restaurant', 'price', 'amount', 'image_tag', 'status']
     readonly_fields = ('image_tag',)
     list_filter = ['status', 'catagory']
     inlines = [ProductImageInline]

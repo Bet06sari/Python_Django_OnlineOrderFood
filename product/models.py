@@ -65,19 +65,19 @@ class Restaurant(MPTTModel):
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self):
-        full_path = [self.title]
-        k = self.parent
-        while k is not None:
-            full_path.append(k.title)
-            k = k.parent
-        return ' -> '.join(full_path[::-1])
+        return self.title
+
+    class MPTTMeta:
+        order_insertion_by= ['title']
 
     def image_tag(self):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
     image_tag.short_description = 'Image'
 
+
+    def get_absolute_url(self):
+        return reverse('restaurant_detail', kwargs={'slug': self.slug})
 
 
 
@@ -86,8 +86,8 @@ class Product(models.Model):
         ('True', 'Evet'),
         ('False', 'Hayır'),
     )
-    catagory = models.ForeignKey(Catagory, on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    catagory = models.ForeignKey(Catagory, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     keywords = models.CharField(blank=True,max_length=255)
     description = models.CharField(blank=True,max_length=255)
@@ -95,10 +95,12 @@ class Product(models.Model):
     amount = models.IntegerField()
     detail = RichTextUploadingField()
     slug = models.SlugField(null=False, unique=True)
+    parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
     image = models.ImageField(blank=True, upload_to='images/')
     status = models.CharField(max_length=10, choices=STATUS)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return self.title
 

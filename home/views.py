@@ -9,7 +9,7 @@ import json
 from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactFormu, ContactFormMessage, UserProfile, FAQ
 from order.models import ShopCart
-from product.models import Product, Catagory, Images, Comment
+from product.models import Product, Catagory, Images, Comment, Restaurant
 
 
 def index(request ):
@@ -22,7 +22,6 @@ def index(request ):
     randomproduct = Product.objects.all().order_by('-id')[:9]
     randomproduct2 = Product.objects.all().order_by('?')[:6]
     request.session['cart_items']= ShopCart.objects.filter(user_id=current_user.id).count()
-
 
     context = {'setting': setting,
                'catagory': catagory,
@@ -90,6 +89,18 @@ def product_detail(request,id,slug):
                }
     return render(request,'product_detail.html',context)
 
+def restaurant_detail(request,id,slug):
+    catagory = Catagory.objects.all()
+    restaurant = Restaurant.objects.get(pk=id)
+    images = Images.objects.filter(product__restaurant_id=id)
+    product = Product.objects.all()
+    context = {'restaurant': restaurant,
+               'catagory': catagory,
+               'images': images,
+               'product': product,
+               }
+    return render(request,'restaurant_detail.html',context)
+
 def product_search(request):
     setting = Setting.objects.get(pk=1)
     if request.method == 'POST':  # Check form post
@@ -100,7 +111,7 @@ def product_search(request):
             catid = form.cleaned_data['catid']
 
             if catid == 0:
-                products = Product.objects.filter(title__icontains=query)  # Select * from Book where title like %query%
+                products = Product.objects.filter(title__icontains=query)
             else:
                 products = Product.objects.filter(title__icontains=query, catagory_id=catid)
 
