@@ -93,7 +93,7 @@ def restaurant_detail(request,id,slug):
     catagory = Catagory.objects.all()
     restaurant = Restaurant.objects.get(pk=id)
     images = Images.objects.filter(product__restaurant_id=id)
-    product = Product.objects.all()
+    product = Product.objects.filter(restaurant__product = restaurant.id)
     context = {'restaurant': restaurant,
                'catagory': catagory,
                'images': images,

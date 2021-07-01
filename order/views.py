@@ -100,13 +100,13 @@ def deletefromcart(request,id):
 @login_required(login_url='/login')
 def orderproduct(request):
     catagory = Catagory.objects.all()
-    current_user=request.user
+    current_user = request.user
     shopcart = ShopCart.objects.filter(user_id=current_user.id)
     total = 0
     for rs in shopcart:
         total += rs.product.price * rs.quantity
 
-    if request.method =='POST':
+    if request.method == 'POST':
         form = OrderForm(request.POST)
 
         if form.is_valid():

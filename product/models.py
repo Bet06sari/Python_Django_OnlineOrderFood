@@ -68,9 +68,6 @@ class Restaurant(MPTTModel):
     def __str__(self):
         return self.title
 
-    class MPTTMeta:
-        order_insertion_by= ['title']
-
     def image_tag(self):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
     image_tag.short_description = 'Image'
@@ -81,7 +78,7 @@ class Restaurant(MPTTModel):
 
 
 
-class Product(models.Model):
+class Product(MPTTModel):
     STATUS = (
         ('True', 'Evet'),
         ('False', 'Hayır'),
